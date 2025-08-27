@@ -1,23 +1,9 @@
-#!/usr/bin/env python3
-"""
-Main Pipeline Execution Script for Multi-Modal Ovarian Cancer Classification
-
-This script runs the complete pipeline:
-1. Data preparation (synthetic data generation)
-2. Model training (three models)
-3. Evaluation and comparison
-
-Usage:
-    python run_pipeline.py
-"""
-
 import os
 import sys
 import time
 from pathlib import Path
 
 def main():
-    """Main pipeline execution function"""
     print("="*60)
     print("MULTI-MODAL OVARIAN CANCER CLASSIFICATION PIPELINE")
     print("="*60)
