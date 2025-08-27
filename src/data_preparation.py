@@ -1,17 +1,3 @@
-#!/usr/bin/env python3
-"""
-Data Preparation for Multi-Modal Ovarian Cancer Classification
-
-This script prepares the synthetic dataset for our multi-modal classification task.
-
-Overview:
-- Uses Breast Cancer Wisconsin (Diagnostic) dataset as tabular component
-- Generates synthetic biomarker data (Age, CA-125, BRCA status)
-- Creates synthetic grayscale images to simulate image modality
-- Prepares train/validation/test splits
-
-Note: This is a structural stand-in using synthetic data, not actual ovarian cancer data.
-"""
 
 import numpy as np
 import pandas as pd
@@ -233,18 +219,18 @@ def main():
     print("- ../data/images/image_*.npy (individual image files)")
     
     # 7. Data Summary and Statistics
-    print("\n=== DATASET SUMMARY ===")
+    print("DATASET SUMMARY: ")
     print(f"Total samples: {len(final_df)}")
     print(f"Features: {len(final_df.columns) - 2}")  # -2 for image_id and target
     print(f"Target distribution: {np.bincount(y)}")
     print(f"Image size: {synthetic_images.shape[1:]} (grayscale)")
     
-    print("\n=== FEATURE TYPES ===")
+    print("FEATURE TYPES")
     print(f"Original features (30): {feature_names[:5]} ...")
     print("Synthetic biomarkers (3): age, ca125_level, brca_status")
     print("Image modality: Synthetic grayscale (64x64)")
     
-    print("\n=== SPLIT SIZES ===")
+    print("SPLIT SIZES")
     print(f"Train: {len(X_train)} ({len(X_train)/len(final_df)*100:.1f}%)")
     print(f"Validation: {len(X_val)} ({len(X_val)/len(final_df)*100:.1f}%)")
     print(f"Test: {len(X_test)} ({len(X_test)/len(final_df)*100:.1f}%)")
@@ -308,7 +294,7 @@ def main():
     plt.savefig('../data/processed/biomarker_distributions.png', dpi=300, bbox_inches='tight')
     print("Biomarker distributions saved to ../data/processed/biomarker_distributions.png")
     
-    print("\n=== DATA PREPARATION COMPLETE ===")
+    print("DATA PREPARATION COMPLETE:")
     print("The dataset is ready for model training!")
 
 if __name__ == "__main__":
