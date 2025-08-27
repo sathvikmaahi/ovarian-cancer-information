@@ -1,22 +1,4 @@
-#!/usr/bin/env python3
-"""
-Multi-Modal Model Implementation for Ovarian Cancer Classification
 
-This script implements three models:
-1. Image-only: Small CNN for image classification
-2. Tabular-only: MLP for tabular feature classification
-3. Fused model: Multi-modal fusion of image and tabular features
-
-Model Architecture Overview:
-- Image encoder: 3 Conv layers + Flatten + Dense head
-- Tabular encoder: MLP with ReLU activation
-- Fusion: Concatenation + Dense layers + Sigmoid output
-
-Training Strategy:
-- Early stopping on validation ROC-AUC
-- Evaluation on test set with comprehensive metrics
-- Model weight saving for each variant
-"""
 
 import numpy as np
 import pandas as pd
@@ -26,14 +8,14 @@ import os
 import warnings
 warnings.filterwarnings('ignore')
 
-# Deep learning libraries
+# Deep learning libraries are implorted for their specific functions
 import tensorflow as tf
 from tensorflow import keras
 from tensorflow.keras import layers, models, optimizers, callbacks
 from tensorflow.keras.applications import ResNet50V2
 from tensorflow.keras.preprocessing.image import ImageDataGenerator
 
-# Scikit-learn for traditional ML
+# Scikit-learn is imported for traditional machine learning algorithms
 from sklearn.linear_model import LogisticRegression
 from sklearn.neural_network import MLPClassifier
 from sklearn.preprocessing import StandardScaler
@@ -46,8 +28,7 @@ from sklearn.metrics import (
 np.random.seed(42)
 tf.random.set_seed(42)
 
-def create_image_cnn(input_shape=(64, 64, 1)):
-    """Create a small CNN for image classification"""
+def create_image_cnn(input_shape=(64, 64, 1)):    #here we created a simple CNN for the claffisication of image
     model = models.Sequential([
         # First conv block
         layers.Conv2D(32, (3, 3), activation='relu', input_shape=input_shape, padding='same'),
@@ -79,7 +60,6 @@ def create_image_cnn(input_shape=(64, 64, 1)):
     return model
 
 def create_tabular_mlp(input_dim):
-    """Create an MLP for tabular feature classification"""
     model = models.Sequential([
         layers.Dense(128, activation='relu', input_dim=input_dim),
         layers.BatchNormalization(),
@@ -99,8 +79,6 @@ def create_tabular_mlp(input_dim):
     return model
 
 def create_fused_model(img_shape=(64, 64, 1), tabular_dim=None):
-    """Create a fused multi-modal model"""
-    
     # Image input and encoder
     img_input = layers.Input(shape=img_shape)
     
